@@ -22,7 +22,7 @@ if (isset($kurs)) {
   }
 
   // Quizfrage auslesen
-  if ($frage <= $fragen) {
+  if ($frage < $fragen) {
    $select = $db->query("SELECT `fragenid`, `frage`, `antwort1`, `antwort2`, `antwort3`, `antwort4`, `richtigeantwort`, `kursfs`
                                             FROM `Fragen`
                                             WHERE `kursfs` = '" . $kurs . "'
@@ -53,9 +53,12 @@ if (isset($kurs)) {
      }
     }
    }
-
+var_dump($frage);
+	  echo "<br>";
+var_dump($fragen);
+	  echo "<br>";
    // Quizfrage stellen
-   if ($eintrag["frage"] != "" &&
+   if ($eintrag["frage"] !== "" &&
        !isset($_POST["ende"])) {
     echo '<form action="" method="post">' .
      '<p class="zaehler">Frage ' . ($frage + 1) . ' von ' . $fragen . '</p>' .
@@ -94,6 +97,10 @@ if (isset($kurs)) {
  // Quiz neu starten
  if ($_SERVER["REQUEST_METHOD"] == "POST") {
    echo '<p>&raquo; <a href="' . basename($_SERVER["SCRIPT_NAME"]) . '">Quiz neu starten</a></p>';
+	 var_dump($frage);
+	  echo "<br>";
+var_dump($fragen);
+	  echo "<br>";
  }
 }
 else {
